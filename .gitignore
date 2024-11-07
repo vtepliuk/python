@@ -1,5 +1,10 @@
+# JetBrains-IDE-mappen vill man sallan ha under source control.
+.idea/
 debug.log
+# den här raden säger att allt under `./me/`-mappen ska ignoreras av git, ...
 me/
+# men vi kan lata kmom06 vara icke-ignorerad med ett "!"
+!me/kmom06/
 bin/
 build/
 .venv/
