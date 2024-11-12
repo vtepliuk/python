@@ -6,6 +6,7 @@ import analyzer
 def main():
     """Main function of the analyzer program."""
     current_file = "phil.txt"
+    #current_file = "lorum.txt"
     content = ""
 
     while True:

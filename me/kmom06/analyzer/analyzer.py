@@ -49,11 +49,30 @@ def word_frequency(text):
     for word in words:
         word_count[word] = word_count.get(word, 0) + 1
 
-    # Sort by frequency first, then alphabetically from Z to A
-    sorted_word_count = sorted(word_count.items(), key=lambda item: (-item[1], item[0]))
+    # Make something like `{ "word": count, ... }` into a list of tuples like `[(count, word), ...]`
+    word_counts = [(count, word) for (word, count) in word_count.items()]
+    print('debug! as is first 10: ', word_counts[:10]) # Check!
+    #
+    # # Sort by Count
+    # word_counts_sorted = sorted(word_counts, key=itemgetter(0), reverse=True)[:10]
+    # print('debug! sorted by count: ', word_counts_sorted) # Check!
+    #
+    # # Sort Alphabetically
+    # words_sorted = sorted(word_counts_sorted, key=itemgetter(1))
+    # print('debug! sorted by word: ', words_sorted) # Check!
+
+    # Sort by Count and then Alphabetically
+    def _my_custom_sort_function(sortable_thing):
+        """My special function to sort by count and then alphabetically"""
+        # print('debug! sortable_things (what is it?): ', sortable_thing) # Check!
+        return sortable_thing[0], sortable_thing[1]
+
+    words_sorted_by_count_then_alphabetically = sorted(word_counts, key=_my_custom_sort_function, reverse=True)
+    print('debug! sorted by count then word: ', words_sorted_by_count_then_alphabetically[:10]) # Check!
+
     total_words = len(words)
 
-    return [(word, count, round((count / total_words) * 100, 1)) for word, count in sorted_word_count[:7]]
+    return [(word, count, round((count / total_words) * 100, 1)) for count, word in words_sorted_by_count_then_alphabetically[:7]]
 
 
 def letter_frequency(text):
