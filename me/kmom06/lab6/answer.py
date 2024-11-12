@@ -209,12 +209,24 @@ dbwebb.assert_equal("1.5", ANSWER, False)
 # Write your code below and put the answer into the variable ANSWER.
 #
 
+with open('quotes.txt', 'r') as file_handle:
+    lines = file_handle.readlines()
 
+lines_2_3_and_4 = []
+for line_number, line in enumerate(lines, 1):
+    if line_number in {2, 3, 4}:
+        lines_2_3_and_4.append(line)
+assert len(lines_2_3_and_4) == 3
 
+with open('extraQuotes.txt', 'w') as file_handle:
+    file_handle.writelines(lines_2_3_and_4)
 
+total_characters = sum(len(line) for line in lines_2_3_and_4)
+line_2_first_9_chars = lines_2_3_and_4[1][:9]
 
+result = f"The file has {total_characters} and the 9 first of the second row are {line_2_first_9_chars}"
 
-ANSWER = "Replace this text with the variable holding the answer."
+ANSWER = result
 
 # I will now test your answer - change false to true to get a hint.
 dbwebb.assert_equal("1.6", ANSWER, False)
